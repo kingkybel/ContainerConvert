@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.29)
+cmake_minimum_required(VERSION 3.26)
 project(ContainerConvert
         VERSION 1.0.0
         DESCRIPTION "A header only for conversion of standard containers"
