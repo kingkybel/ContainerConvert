@@ -122,7 +122,7 @@ void eraseByValue(std::map<Key_, Value_, Compare_, Alloc_> &map2filter, ValuePre
             ++it;
         }
     }
-    // since C++-11 this does no longer work because of explicitly removed assignmentfor pairs:
+    // since C++-11 this does no longer work because of explicitly removed assignment for pairs:
     // map2filter.erase(std::remove_if(map2filter.begin(), map2filter.end(), removeCondition), map2filter.end());
 }
 
@@ -228,7 +228,7 @@ template <typename Value_, typename Alloc_>
 inline std::set<Value_, std::less<Value_>, Alloc_> toSet(std::vector<Value_, Alloc_> const &vec)
 {
     static_assert(util::is_less_comparable_v<Value_>, "Ordered set elements must be less-than comparable");
-    static_assert(util::is_equality_comparable_v<Value_>, "Ordered set elements must be equal comparable");
+    static_assert(util::is_equality_comparable_v<Value_>, "Ordered set elements must be equality comparable");
 
     std::set<Value_, std::less<Value_>, Alloc_> reval;
 
@@ -254,7 +254,7 @@ template <typename Value_, typename Hash_, typename Pred_, typename Alloc_>
 inline std::set<Value_, std::less<Value_>, Alloc_> toSet(std::unordered_set<Value_, Hash_, Pred_, Alloc_> const &uSet)
 {
     static_assert(util::is_less_comparable_v<Value_>, "Ordered set elements must be less-than comparable");
-    static_assert(util::is_equality_comparable_v<Value_>, "Ordered set elements must be equal comparable");
+    static_assert(util::is_equality_comparable_v<Value_>, "Ordered set elements must be equality comparable");
 
     std::set<Value_, std::less<Value_>, Alloc_> reval;
 
@@ -282,7 +282,7 @@ inline std::map<Key_, Value_, std::less<Key_>, Alloc_>
     toMap(std::unordered_map<Key_, Value_, Hash_, Pred_, Alloc_> const &uMap)
 {
     static_assert(util::is_less_comparable_v<Key_>, "Ordered map keys must be less-than comparable");
-    static_assert(util::is_equality_comparable_v<Key_>, "Ordered map keys must be equal comparable");
+    static_assert(util::is_equality_comparable_v<Key_>, "Ordered map keys must be equality comparable");
 
     std::map<Key_, Value_, std::less<Key_>, Alloc_> reval;
 
@@ -321,7 +321,7 @@ inline std::set<Key_, std::less<Key_>, AllocRet_>
     toOrderedKeySet(std::unordered_map<Key_, Value_, Hash_, Pred_, Alloc_> const &uMap)
 {
     static_assert(util::is_less_comparable_v<Key_>, "Ordered set elements need to be less-than comparable");
-    static_assert(util::is_equality_comparable_v<Key_>, "Ordered set elements keys need to be equal comparable");
+    static_assert(util::is_equality_comparable_v<Key_>, "Ordered set elements keys need to be equality comparable");
 
     std::set<Key_, std::less<Key_>, AllocRet_> reval;
 
