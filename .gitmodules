@@ -1,0 +1,3 @@
+[submodule "TypeTraits"]
+	path = TypeTraits
+	url = git@github.com:kingkybel/TypeTraits.git
