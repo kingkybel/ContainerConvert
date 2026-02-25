@@ -5,6 +5,7 @@ project(ContainerConvert
         HOMEPAGE_URL "https://github.com/kingkybel/ContainerConvert")
 
 include(GNUInstallDirs)
+enable_testing()
 
 if (CMAKE_BUILD_TYPE STREQUAL "")
     set(CMAKE_BUILD_TYPE RelWithDebInfo)

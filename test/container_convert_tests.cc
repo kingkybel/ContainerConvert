@@ -236,3 +236,61 @@ TEST_F(ContainerConvertTest, unordered_set_toSet_compile_error_test)
     cout << "Pass parameter '-DUNORDERED_SET_TO_SET_COMPILATION_ERROR' to verify static assert works" << endl;
 #endif
 }
+
+TEST_F(ContainerConvertTest, eraseByKey_truePredicate_removesAll)
+{
+    auto values = map<string, int>{{"one", 1}, {"two", 2}, {"three", 3}};
+    eraseByKey(values, true_pred<string>{});
+    ASSERT_TRUE(values.empty());
+}
+
+TEST_F(ContainerConvertTest, eraseByValue_truePredicate_removesAll)
+{
+    auto values = map<string, int>{{"one", 1}, {"two", 2}, {"three", 3}};
+    eraseByValue(values, true_pred<int>{});
+    ASSERT_TRUE(values.empty());
+}
+
+TEST_F(ContainerConvertTest, eraseRemove_predicateMatchesNothing_keepsContainer)
+{
+    auto vec = vector<int>{1, 2, 3, 4};
+    eraseRemove(vec, [](int i) { return i > 100; });
+    auto expected = vector<int>{1, 2, 3, 4};
+    ASSERT_EQ(vec, expected);
+}
+
+TEST_F(ContainerConvertTest, moveElementsTo_predicateMatchesNothing_keepsSource)
+{
+    auto src = vector<int>{1, 2, 3};
+    auto dst = vector<int>{10};
+    moveElementsTo(src, dst, [](int i) { return i < 0; });
+    auto expectedSrc = vector<int>{1, 2, 3};
+    auto expectedDst = vector<int>{10};
+    ASSERT_EQ(src, expectedSrc);
+    ASSERT_EQ(dst, expectedDst);
+}
+
+TEST_F(ContainerConvertTest, emptyContainerConversions_returnEmptyContainers)
+{
+    auto emptySet  = set<int>{};
+    auto emptyQue  = deque<int>{};
+    auto emptyVec  = vector<int>{};
+    auto emptyUSet = unordered_set<int>{};
+    auto emptyUMap = unordered_map<string, int>{};
+
+    auto vecFromSet  = toVector(emptySet);
+    auto vecFromQue  = toVector(emptyQue);
+    auto queFromVec  = toDeque(emptyVec);
+    auto setFromVec  = toSet(emptyVec);
+    auto setFromUSet = toSet(emptyUSet);
+    auto mapFromUMap = toMap(emptyUMap);
+    auto keysFromMap = toOrderedKeySet(emptyUMap);
+
+    ASSERT_TRUE(vecFromSet.empty());
+    ASSERT_TRUE(vecFromQue.empty());
+    ASSERT_TRUE(queFromVec.empty());
+    ASSERT_TRUE(setFromVec.empty());
+    ASSERT_TRUE(setFromUSet.empty());
+    ASSERT_TRUE(mapFromUMap.empty());
+    ASSERT_TRUE(keysFromMap.empty());
+}
