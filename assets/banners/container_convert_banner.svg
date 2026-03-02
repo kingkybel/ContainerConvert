@@ -1,0 +1,30 @@
+<svg width="1600" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ContainerConvert banner">
+  <!-- Background: Deep Dark Gray/Blue for Tech/Logic feel -->
+  <rect width="1600" height="400" fill="#1B2B34"/>
+  
+  <!-- Decorative background elements -->
+  <circle cx="200" cy="400" r="300" fill="#CC7A00" fill-opacity="0.1"/>
+  <circle cx="1450" cy="50" r="200" fill="#ffffff" fill-opacity="0.05"/>
+  
+  <!-- Text Content: Neatly Aligned, Clean White/Orange -->
+  <g transform="translate(120, 180)">
+    <text font-family="Segoe UI, Arial, sans-serif" font-size="96" font-weight="700" fill="#FFFFFF">ContainerConvert</text>
+    <text y="70" font-family="Segoe UI, Arial, sans-serif" font-size="36" fill="#FF9900">Header-only C++ utilities for STL containers</text>
+  </g>
+  
+  <!-- Right Side Icon: Centered Vertically -->
+  <g transform="translate(1300, 200)">
+    <!-- Background Circle: Muted Orange/Gray -->
+    <circle r="160" fill="#24333D" stroke="#CC7A00" stroke-width="4"/>
+    
+    <!-- Conversion Icon: Two overlapping containers with transition arrow -->
+    <g id="conversion-icon">
+        <!-- Source Container (Square-ish) -->
+        <rect x="-80" y="-60" width="70" height="70" rx="8" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+        <!-- Arrow representing conversion -->
+        <path d="M -5 0 L 35 0 M 20 -15 L 35 0 L 20 15" fill="none" stroke="#FF9900" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- Target Container (Rounded/Circle-ish) -->
+        <circle cx="80" cy="0" r="40" fill="none" stroke="#FFFFFF" stroke-width="8"/>
+    </g>
+  </g>
+</svg>

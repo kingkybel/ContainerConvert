@@ -1,5 +1,7 @@
 # ContainerConvert
 
+![ContainerConvert banner](assets/banners/container_convert_banner.svg)
+
 Header-only C++ utilities for converting and filtering standard containers.
 
 ## What This Repository Does
@@ -74,6 +76,12 @@ ctest --test-dir build --output-on-failure
 
 - Added `cmake-common` as a second git submodule in `.gitmodules`.
   - This provides shared CMake settings for dkyb repositories and is now tracked directly in this repo.
+  
+## Powered by
+Reduce the smells, keep on top of code-quality. Sonar Qube is run on every push to the `main` branch on GitHub.
+
+
+[![SonarQubeCloud](assets/icons/logo-sonarqube-cloud-small.png)](https://sonarcloud.io/project/overview?id=kingkybel)
 
 ## License
 
