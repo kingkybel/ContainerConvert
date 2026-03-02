@@ -43,10 +43,9 @@ namespace util
  * @tparam Value_ @tparam Value_  type of the value
  * @return true always, false never
  */
-template <typename Value_>
-struct true_pred
+template <typename Value_> struct true_pred
 {
-    bool operator()(Value_)
+    bool operator()(Value_) const
     {
         return true;
     }
@@ -60,10 +59,10 @@ struct true_pred
  * @param container the container to remove from
  * @param pred predicate to decide which elements to remove
  */
-template <typename Container, typename Predicate>
-void eraseRemove(Container &container, Predicate pred)
+template <typename Container, typename Predicate> void eraseRemove(Container &container, Predicate pred)
 {
-    container.erase(std::remove_if(container.begin(), container.end(), pred), container.end());
+    auto [new_end, end] = std::ranges::remove_if(container, pred);
+    container.erase(new_end, end);
 }
 
 /**
@@ -80,20 +79,7 @@ void eraseRemove(Container &container, Predicate pred)
 template <typename Key_, typename Value_, typename Compare_, typename Alloc_, typename KeyPred_>
 void eraseByKey(std::map<Key_, Value_, Compare_, Alloc_> &map2filter, KeyPred_ pred = true_pred<Key_>{})
 {
-    auto it = map2filter.begin();
-    while (it != map2filter.end())
-    {
-        if (pred(it->first))
-        {
-            it = map2filter.erase(it);
-        }
-        else
-        {
-            ++it;
-        }
-    }
-    // since C++-11 this does no longer work because of explicitly removed assignment for pairs:
-    // map2filter.erase(std::remove_if(map2filter.begin(), map2filter.end(), removeCondition), map2filter.end());
+    std::erase_if(map2filter, [&pred](auto const &item) { return pred(item.first); });
 }
 
 /**
@@ -110,20 +96,7 @@ void eraseByKey(std::map<Key_, Value_, Compare_, Alloc_> &map2filter, KeyPred_ p
 template <typename Key_, typename Value_, typename Compare_, typename Alloc_, typename ValuePred_>
 void eraseByValue(std::map<Key_, Value_, Compare_, Alloc_> &map2filter, ValuePred_ pred = true_pred<Value_>{})
 {
-    auto it = map2filter.begin();
-    while (it != map2filter.end())
-    {
-        if (pred(it->second))
-        {
-            it = map2filter.erase(it);
-        }
-        else
-        {
-            ++it;
-        }
-    }
-    // since C++-11 this does no longer work because of explicitly removed assignment for pairs:
-    // map2filter.erase(std::remove_if(map2filter.begin(), map2filter.end(), removeCondition), map2filter.end());
+    std::erase_if(map2filter, [&pred](auto const &item) { return pred(item.second); });
 }
 
 /**
@@ -169,7 +142,7 @@ inline std::vector<Value_, Alloc_> toVector(std::set<Value_, Compare_, Alloc_> c
 
     if (!orderedSet.empty())
     {
-        std::copy(orderedSet.begin(), orderedSet.end(), std::back_inserter(reval));
+        std::ranges::copy(orderedSet, std::back_inserter(reval));
     }
 
     return reval;
@@ -189,7 +162,7 @@ inline std::vector<Value_, Alloc_> toVector(std::deque<Value_, Alloc_> const &qu
     std::vector<Value_, Alloc_> reval;
     if (!que.empty())
     {
-        std::copy(que.begin(), que.end(), std::back_inserter(reval));
+        std::ranges::copy(que, std::back_inserter(reval));
     }
 
     return reval;
@@ -210,7 +183,7 @@ inline std::deque<Value_, Alloc_> toDeque(std::vector<Value_, Alloc_> const &vec
 
     if (!vec.empty())
     {
-        std::copy(vec.begin(), vec.end(), std::back_inserter(reval));
+        std::ranges::copy(vec, std::back_inserter(reval));
     }
 
     return reval;
@@ -234,7 +207,7 @@ inline std::set<Value_, std::less<Value_>, Alloc_> toSet(std::vector<Value_, All
 
     if (!vec.empty())
     {
-        std::copy(vec.begin(), vec.end(), std::inserter(reval, reval.begin()));
+        std::ranges::copy(vec, std::inserter(reval, reval.begin()));
     }
 
     return reval;
@@ -260,7 +233,7 @@ inline std::set<Value_, std::less<Value_>, Alloc_> toSet(std::unordered_set<Valu
 
     if (!uSet.empty())
     {
-        std::copy(uSet.begin(), uSet.end(), std::inserter(reval, reval.begin()));
+        std::ranges::copy(uSet, std::inserter(reval, reval.begin()));
     }
 
     return reval;
