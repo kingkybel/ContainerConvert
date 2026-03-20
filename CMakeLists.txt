@@ -12,6 +12,7 @@ include(${CMAKE_CURRENT_SOURCE_DIR}/cmake-common/cmake/DkybBuildSettings.cmake)
 dkyb_apply_common_settings(
         EXTRA_CXX_FLAGS "-DBOOST_ALLOW_DEPRECATED_HEADERS" "-DBOOST_BIND_GLOBAL_PLACEHOLDERS"
 )
+dkyb_update_submodules()
 
 execute_process(
         COMMAND bash -c "printf \"%s\" $(cat /etc/os-release | grep -E \"^ID=[^\\n]*|^VERSION_ID=[^\\n]*\" | cut -f2 -d= | tr -d '\"')"
