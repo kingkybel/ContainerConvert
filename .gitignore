@@ -3,7 +3,7 @@
 /build.docker
 /src/*.o
 /test/*.o
-/cmake-build-debug/
+/cmake-build-*/
 
 # doxygen output directory
 /doxygen
@@ -38,4 +38,4 @@
 /.idea/
 
 # zencoder dirs
-/.zencoder/
+/.zen*
