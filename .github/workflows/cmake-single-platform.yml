@@ -25,6 +25,7 @@ jobs:
     with:
       dependency-name: typetraits
       dependency-version: main
+      cmake-version: 3.28.3
 
   debugtrace:
     uses: kingkybel/CMakeCommon/.github/workflows/dependency-cache.yml@main
