@@ -20,12 +20,6 @@ jobs:
       dependency-name: gtest
       dependency-version: 1.17.0
 
-  boost:
-    uses: kingkybel/CMakeCommon/.github/workflows/dependency-cache.yml@main
-    with:
-      dependency-name: boost
-      dependency-version: 1.90.0
-
   typetraits:
     uses: kingkybel/CMakeCommon/.github/workflows/dependency-cache.yml@main
     with:
@@ -45,7 +39,6 @@ jobs:
     runs-on: ubuntu-latest
     needs:
       - gtest
-      - boost
       - typetraits
       - debugtrace
 
