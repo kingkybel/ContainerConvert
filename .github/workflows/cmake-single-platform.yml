@@ -20,18 +20,20 @@ jobs:
       dependency-name: gtest
       dependency-version: 1.17.0
 
+  debugtrace:
+    uses: kingkybel/CMakeCommon/.github/workflows/dependency-cache.yml@main
+    needs: gtest
+    with:
+      dependency-name: debugtrace
+      dependency-version: main
+
   typetraits:
     uses: kingkybel/CMakeCommon/.github/workflows/dependency-cache.yml@main
+    needs: debugtrace
     with:
       dependency-name: typetraits
       dependency-version: main
       cmake-version: 3.28.3
-
-  debugtrace:
-    uses: kingkybel/CMakeCommon/.github/workflows/dependency-cache.yml@main
-    with:
-      dependency-name: debugtrace
-      dependency-version: main
 
   build:
     # The CMake configure and build commands are platform agnostic and should work equally well on Windows or Mac.
